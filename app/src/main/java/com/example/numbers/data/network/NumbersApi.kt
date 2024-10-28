@@ -1,5 +1,6 @@
 package com.example.numbers.data.network
 
+import com.example.numbers.data.network.models.Fact
 import retrofit2.http.GET
 import retrofit2.http.Path
 
