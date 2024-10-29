@@ -29,6 +29,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -46,25 +47,15 @@ import com.example.numbers.R
 import com.example.numbers.presentation.ui.components.CommonButton
 import com.example.numbers.presentation.ui.models.FactUi
 import com.example.numbers.presentation.ui.utils.tapGesturesDetector
+import com.example.numbers.presentation.viewModels.MainViewModel
 
 @Composable
 fun MainScreen(
+    viewModel: MainViewModel,
     modifier: Modifier = Modifier
 ) {
-    val faceSearchItems = listOf(
-        FactUi(1, 7680, "7680 is the number of possible rook moves on a 16×16 chessboard."),
-        FactUi(2, 4264, "4264 is a number whose sum of squares of the divisors is a square."),
-        FactUi(3, 0, "0 is the coldest possible temperature old the Kelvin scale."),
-        FactUi(4, -1, "-1 is an uninteresting number."),
-        FactUi(5, 7680, "7680 is the number of possible rook moves on a 16×16 chessboard."),
-        FactUi(6, 4264, "4264 is a number whose sum of squares of the divisors is a square."),
-        FactUi(7, 0, "0 is the coldest possible temperature old the Kelvin scale."),
-        FactUi(8, -1, "-1 is an uninteresting number."),
-        FactUi(9, 7680, "7680 is the number of possible rook moves on a 16×16 chessboard."),
-        FactUi(10, 4264, "4264 is a number whose sum of squares of the divisors is a square."),
-        FactUi(11, 0, "0 is the coldest possible temperature old the Kelvin scale."),
-        FactUi(12, -1, "-1 is an uninteresting number.")
-    )
+    val uiState = viewModel.uiState.collectAsState()
+
     var search by rememberSaveable { mutableStateOf("") }
 
     val focusManager = LocalFocusManager.current
@@ -74,8 +65,8 @@ fun MainScreen(
             FactSearch(
                 search = search,
                 onSearchChange = { search = it },
-                onGetFactClick = { print(it) },
-                onGetRandomFactClick = { },
+                onGetFactClick = { viewModel.getFactByNumber(search.toInt()) },
+                onGetRandomFactClick = { viewModel.getFactAboutRandomNumber() },
                 modifier = Modifier.tapGesturesDetector {
                     focusManager.clearFocus()
                 }
@@ -87,7 +78,8 @@ fun MainScreen(
                 focusManager.clearFocus()
             }
     ) { innerPadding ->
-        if (faceSearchItems.isEmpty()) {
+        val uiState = uiState.value
+        if (uiState.isEmpty()) {
             EmptySearchHistory(
                 modifier = Modifier
                     .fillMaxSize()
@@ -95,7 +87,7 @@ fun MainScreen(
             )
         } else {
             SearchHistory(
-                items = faceSearchItems,
+                items = uiState,
                 onItemClick = { },
                 modifier = Modifier
                     .fillMaxWidth()
