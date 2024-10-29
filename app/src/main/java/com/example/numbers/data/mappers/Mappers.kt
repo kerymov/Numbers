@@ -7,6 +7,6 @@ fun FactEntity.mapToFact(): Fact {
     return Fact(
         id = this.id,
         number = this.number,
-        fact = this.fact
+        text = this.fact
     )
 }

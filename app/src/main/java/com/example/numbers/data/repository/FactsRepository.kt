@@ -15,11 +15,11 @@ class FactsRepository(
 ) {
 
     suspend fun getFactAboutNumber(number: Int) {
-        val fact = api.getFactAboutNumber(number)
+        val factResponse = api.getFactAboutNumber(number)
         saveFact(
             fact = FactEntity(
-                number = number,
-                fact = fact.text
+                number = factResponse.number,
+                fact = factResponse.text
             )
         )
     }
@@ -28,7 +28,7 @@ class FactsRepository(
         val fact = api.getFactAboutRandomNumber()
         saveFact(
             fact = FactEntity(
-                number = fact.text.filter { it.isDigit() }.toInt(),
+                number = fact.number,
                 fact = fact.text
             )
         )
