@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Numbers</string>
+    <string name="search_a_fact">Search a fact</string>
+    <string name="by_number">by number</string>
+    <string name="search">Search</string>
+    <string name="enter_a_number">Enter a number</string>
+    <string name="get_fact">Get fact</string>
+    <string name="get_fact_about_random_number">Get fact about random number</string>
+    <string name="search_history">Search history</string>
+    <string name="here_you_will_see_the_history_of_your_searches">Here you will see the history of your searches</string>
 </resources>

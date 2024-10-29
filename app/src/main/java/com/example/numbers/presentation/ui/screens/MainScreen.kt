@@ -37,10 +37,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.example.numbers.R
 import com.example.numbers.presentation.ui.components.CommonButton
 import com.example.numbers.presentation.ui.models.FactUi
 import com.example.numbers.presentation.ui.utils.tapGesturesDetector
@@ -131,7 +133,7 @@ private fun FactSearch(
             style = MaterialTheme.typography.titleLarge
         )
         Text(
-            text = "by number",
+            text = stringResource(R.string.by_number),
             style = MaterialTheme.typography.labelLarge
         )
         Spacer(modifier = Modifier.size(24.dp))
@@ -141,13 +143,13 @@ private fun FactSearch(
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Rounded.Search,
-                    contentDescription = "Search",
+                    contentDescription = stringResource(R.string.search),
                     tint = MaterialTheme.colorScheme.secondary
                 )
             },
             placeholder = {
                 Text(
-                    text = "Enter a number",
+                    text = stringResource(R.string.enter_a_number),
                     style = MaterialTheme.typography.bodyLarge
                 )
             },
@@ -162,13 +164,13 @@ private fun FactSearch(
         )
         Spacer(modifier = Modifier.size(24.dp))
         CommonButton(
-            title = "Get fact",
+            title = stringResource(R.string.get_fact),
             onClick = { onGetFactClick(search) },
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.size(12.dp))
         CommonButton(
-            title = "Get fact about random number",
+            title = stringResource(R.string.get_fact_about_random_number),
             onClick = onGetRandomFactClick,
             modifier = Modifier.fillMaxWidth()
         )
@@ -186,7 +188,7 @@ private fun SearchHistory(
 ) {
     stickyHeader {
         Text(
-            text = "Search history",
+            text = stringResource(R.string.search_history),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.secondary,
@@ -261,7 +263,7 @@ private fun EmptySearchHistory(
     ) {
         Icon(
             imageVector = Icons.Rounded.Search,
-            contentDescription = "Search",
+            contentDescription = stringResource(R.string.search),
             tint = MaterialTheme.colorScheme.secondary,
             modifier = Modifier.size(100.dp)
         )
@@ -269,7 +271,7 @@ private fun EmptySearchHistory(
         Spacer(modifier = Modifier.size(36.dp))
 
         Text(
-            text = "Here you will see the history of your searches",
+            text = stringResource(R.string.here_you_will_see_the_history_of_your_searches),
             style = MaterialTheme.typography.titleMedium,
             textAlign = TextAlign.Center
         )
