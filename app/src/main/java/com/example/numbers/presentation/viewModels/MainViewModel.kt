@@ -14,13 +14,14 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlin.collections.map
 
 data class MainUiState(
-    val isLoading: Boolean = true,
     val errorMessage: String? = null,
     val currentFact: FactUi? = null,
     val searchHistory: List<FactUi> = listOf()
@@ -54,7 +55,6 @@ class MainViewModel(
                     _uiState.update {
                         it.copy(searchHistory = facts)
                     }
-
                 }
         }
     }
@@ -65,14 +65,12 @@ class MainViewModel(
 
     fun getFactByNumber(number: Long) {
         viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
-            _uiState.update { it.copy(isLoading = true, errorMessage = null) }
             repository.getFactAboutNumber(number)
         }
     }
 
     fun getFactAboutRandomNumber() {
         viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
-            _uiState.update { it.copy(isLoading = true, errorMessage = null) }
             repository.getFactAboutRandomNumber()
         }
     }
