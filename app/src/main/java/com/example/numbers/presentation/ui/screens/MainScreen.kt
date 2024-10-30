@@ -77,12 +77,16 @@ fun MainScreen(
                 onGetFactClick = {
                     val number = search.toLongOrNull()
                     if (number != null) {
+                        viewModel.clearErrorMessage()
                         viewModel.getFactByNumber(number)
                     } else {
                         viewModel.setErrorMessage(message = outOfBoundsError)
                     }
                 },
-                onGetRandomFactClick = { viewModel.getFactAboutRandomNumber() },
+                onGetRandomFactClick = {
+                    viewModel.clearErrorMessage()
+                    viewModel.getFactAboutRandomNumber()
+                },
                 modifier = Modifier.tapGesturesDetector {
                     focusManager.clearFocus()
                 }
