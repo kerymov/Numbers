@@ -22,7 +22,7 @@ fun CenterAlignedTopBar(
     title: String,
     onNavigationButtonClick: () -> Unit = { }
 ) {
-    val containerColor = MaterialTheme.colorScheme.background
+    val containerColor = MaterialTheme.colorScheme.primary
     val contentColor = MaterialTheme.colorScheme.contentColorFor(containerColor)
 
     CenterAlignedTopAppBar(
