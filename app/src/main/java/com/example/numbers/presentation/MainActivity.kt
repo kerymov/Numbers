@@ -23,8 +23,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         val factsRepository = FactsRepository(
-            database = (application as NumbersApplication).database,
-            api = (application as NumbersApplication).api
+            roomDataSource = (application as NumbersApplication).roomDataSource,
+            retrofitDataSource = (application as NumbersApplication).retrofitDataSource
         )
         val mainViewModel by viewModels<MainViewModel> {
             MainViewModel.createFactory(factsRepository)
