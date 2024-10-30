@@ -17,7 +17,7 @@ class FactsRepository(
     private val retrofitDataSource: RetrofitDataSource
 ) {
 
-    suspend fun getFactAboutNumber(number: Int) {
+    suspend fun getFactAboutNumber(number: Long) {
         val result = retrofitDataSource.getFactAboutNumber(number)
         handleNetworkResult(result)
     }

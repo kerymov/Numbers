@@ -9,7 +9,7 @@ class RetrofitDataSource(
     private val api: NumbersApi
 ) {
 
-    suspend fun getFactAboutNumber(number: Int): NetworkResult<FactResponse> {
+    suspend fun getFactAboutNumber(number: Long): NetworkResult<FactResponse> {
         return handleApi { api.getFactAboutNumber(number) }
     }
 

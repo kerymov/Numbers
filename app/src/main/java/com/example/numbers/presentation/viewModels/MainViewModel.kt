@@ -63,7 +63,7 @@ class MainViewModel(
         _uiState.update { it.copy(errorMessage = throwable.message) }
     }
 
-    fun getFactByNumber(number: Int) {
+    fun getFactByNumber(number: Long) {
         viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
             _uiState.update { it.copy(isLoading = true, errorMessage = null) }
             repository.getFactAboutNumber(number)
@@ -80,6 +80,10 @@ class MainViewModel(
     fun setCurrentFactById(id: Long) {
         val currentFact = _uiState.value.searchHistory.find { it.id == id }
         _uiState.update { it.copy(currentFact = currentFact) }
+    }
+
+    fun setErrorMessage(message: String) {
+        _uiState.update { it.copy(errorMessage = message) }
     }
 
     fun clearErrorMessage() {

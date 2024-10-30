@@ -69,13 +69,19 @@ fun MainScreen(
             FactSearch(
                 search = search,
                 onSearchChange = {
-                    if (it.isEmpty() || it.matches(pattern) || it == "-") {
+                    if ((it.isEmpty() || it.matches(pattern) || it == "-")) {
                         search = it
                     }
                 },
                 onGetFactClick = {
-                    val number = search.toIntOrNull()
-                    if (number != null) viewModel.getFactByNumber(number)
+                    val number = search.toLongOrNull()
+                    if (number != null) {
+                        viewModel.getFactByNumber(number)
+                    } else {
+                        viewModel.setErrorMessage(
+                            message = "Entered value is out of bounds"
+                        )
+                    }
                 },
                 onGetRandomFactClick = { viewModel.getFactAboutRandomNumber() },
                 modifier = Modifier.tapGesturesDetector {
