@@ -1,12 +1,16 @@
 package com.example.numbers.presentation.ui.components
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Error
+import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -20,10 +24,11 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun ErrorCard(
     text: String,
+    onCloseClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) = Card(
     colors = CardDefaults.cardColors(
-        containerColor = MaterialTheme.colorScheme.error.copy(alpha = 0.8f)
+        containerColor = MaterialTheme.colorScheme.error
     ),
     modifier = modifier
         .fillMaxWidth()
@@ -31,22 +36,31 @@ fun ErrorCard(
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 12.dp)
     ) {
         Icon(
             imageVector = Icons.Filled.Error,
-            contentDescription = "Error icon",
+            contentDescription = "Error",
             tint = MaterialTheme.colorScheme.onError
         )
-
-        Spacer(modifier = Modifier.width(8.dp))
 
         Text(
             text = text,
             style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.onError
+            color = MaterialTheme.colorScheme.onError,
+            modifier = Modifier.weight(1f)
+        )
+
+        Icon(
+            imageVector = Icons.Rounded.Close,
+            contentDescription = "Error",
+            tint = MaterialTheme.colorScheme.onError,
+            modifier = Modifier
+                .align(Alignment.Top)
+                .clickable { onCloseClick() }
         )
     }
 }

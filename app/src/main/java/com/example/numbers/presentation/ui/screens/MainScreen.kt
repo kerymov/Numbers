@@ -29,6 +29,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -45,6 +46,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.numbers.R
 import com.example.numbers.presentation.ui.components.CommonButton
+import com.example.numbers.presentation.ui.components.ErrorCard
 import com.example.numbers.presentation.ui.models.FactUi
 import com.example.numbers.presentation.ui.utils.tapGesturesDetector
 import com.example.numbers.presentation.viewModels.MainViewModel
@@ -65,8 +67,14 @@ fun MainScreen(
             FactSearch(
                 search = search,
                 onSearchChange = { search = it },
-                onGetFactClick = { viewModel.getFactByNumber(search.toInt()) },
-                onGetRandomFactClick = { viewModel.getFactAboutRandomNumber() },
+                onGetFactClick = {
+                    viewModel.getFactByNumber(search.toInt())
+                    search = ""
+                },
+                onGetRandomFactClick = {
+                    viewModel.getFactAboutRandomNumber()
+                    search = ""
+                },
                 modifier = Modifier.tapGesturesDetector {
                     focusManager.clearFocus()
                 }
@@ -78,21 +86,31 @@ fun MainScreen(
                 focusManager.clearFocus()
             }
     ) { innerPadding ->
-        val uiState = uiState.value
-        if (uiState.isEmpty()) {
-            EmptySearchHistory(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding)
-            )
-        } else {
-            SearchHistory(
-                items = uiState,
-                onItemClick = { },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(innerPadding)
-            )
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+        ) {
+            val uiState = uiState.value
+            if (uiState.searchHistory.isEmpty()) {
+                EmptySearchHistory(
+                    modifier = Modifier.fillMaxSize()
+                )
+            } else {
+                SearchHistory(
+                    items = uiState.searchHistory.reversed(),
+                    onItemClick = { },
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+
+            if (uiState.errorMessage != null) {
+                ErrorCard(
+                    text = uiState.errorMessage,
+                    onCloseClick = { viewModel.clearErrorMessage() },
+                    modifier = Modifier.align(Alignment.BottomCenter)
+                )
+            }
         }
     }
 }

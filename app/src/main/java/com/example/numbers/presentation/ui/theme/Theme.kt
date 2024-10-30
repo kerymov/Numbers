@@ -9,10 +9,12 @@ private val LightColorScheme = lightColorScheme(
     secondary = GreenDark,
     background = GreenLight,
     surface = Light,
+    error = Red,
     onPrimary = Light,
     onSecondary = Light,
     onBackground = GreenDark,
-    onSurface = GreenDark
+    onSurface = GreenDark,
+    onError = Light
 )
 
 @Composable
