@@ -58,6 +58,7 @@ fun MainScreen(
 ) {
     val uiState = viewModel.uiState.collectAsState()
 
+    val pattern = Regex("^-?[1-9]\\d*|0\$")
     var search by rememberSaveable { mutableStateOf("") }
 
     val focusManager = LocalFocusManager.current
@@ -66,15 +67,16 @@ fun MainScreen(
         topBar = {
             FactSearch(
                 search = search,
-                onSearchChange = { search = it },
+                onSearchChange = {
+                    if (it.isEmpty() || it.matches(pattern) || it == "-") {
+                        search = it
+                    }
+                },
                 onGetFactClick = {
-                    viewModel.getFactByNumber(search.toInt())
-                    search = ""
+                    val number = search.toIntOrNull()
+                    if (number != null) viewModel.getFactByNumber(number)
                 },
-                onGetRandomFactClick = {
-                    viewModel.getFactAboutRandomNumber()
-                    search = ""
-                },
+                onGetRandomFactClick = { viewModel.getFactAboutRandomNumber() },
                 modifier = Modifier.tapGesturesDetector {
                     focusManager.clearFocus()
                 }
