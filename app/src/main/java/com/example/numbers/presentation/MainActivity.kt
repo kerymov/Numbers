@@ -5,14 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.ui.Modifier
 import com.example.numbers.NumbersApplication
 import com.example.numbers.data.repository.FactsRepository
-import com.example.numbers.presentation.ui.screens.MainScreen
+import com.example.numbers.presentation.navigation.NavigationController
+import com.example.numbers.presentation.navigation.Route
 import com.example.numbers.presentation.ui.theme.NumbersTheme
 import com.example.numbers.presentation.viewModels.MainViewModel
 import kotlin.getValue
@@ -32,9 +28,9 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             NumbersTheme {
-                MainScreen(
-                    viewModel = mainViewModel,
-                    modifier = Modifier.fillMaxSize()
+                NavigationController(
+                    startDestination = Route.MAIN,
+                    viewModel = mainViewModel
                 )
             }
         }

@@ -9,13 +9,11 @@ import com.example.numbers.presentation.mappers.mapToFactUi
 import com.example.numbers.presentation.ui.models.FactUi
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -82,10 +80,6 @@ class MainViewModel(
     fun setCurrentFactById(id: Long) {
         val currentFact = _uiState.value.searchHistory.find { it.id == id }
         _uiState.update { it.copy(currentFact = currentFact) }
-    }
-
-    fun clearCurrentFact() {
-        _uiState.update { it.copy(currentFact = null) }
     }
 
     fun clearErrorMessage() {
