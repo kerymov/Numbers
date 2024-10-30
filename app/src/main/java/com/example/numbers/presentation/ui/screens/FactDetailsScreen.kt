@@ -13,9 +13,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.numbers.R
 import com.example.numbers.presentation.ui.components.CenterAlignedTopBar
-import com.example.numbers.presentation.ui.models.FactUi
 import com.example.numbers.presentation.viewModels.MainViewModel
 
 @Composable
@@ -64,7 +65,7 @@ private fun FactDescriptionCard(
         ) {
             if (!found) {
                 Text(
-                    text = "Not found",
+                    text = stringResource(R.string.not_found),
                     style = MaterialTheme.typography.labelLarge,
                     color = MaterialTheme.colorScheme.outline,
                     modifier = Modifier

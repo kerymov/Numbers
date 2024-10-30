@@ -60,6 +60,7 @@ fun MainScreen(
     val uiState = viewModel.uiState.collectAsState()
 
     val pattern = Regex("^-?[1-9]\\d*|0\$")
+    val outOfBoundsError = stringResource(R.string.entered_value_is_out_of_bounds)
     var search by rememberSaveable { mutableStateOf("") }
 
     val focusManager = LocalFocusManager.current
@@ -78,9 +79,7 @@ fun MainScreen(
                     if (number != null) {
                         viewModel.getFactByNumber(number)
                     } else {
-                        viewModel.setErrorMessage(
-                            message = "Entered value is out of bounds"
-                        )
+                        viewModel.setErrorMessage(message = outOfBoundsError)
                     }
                 },
                 onGetRandomFactClick = { viewModel.getFactAboutRandomNumber() },
@@ -151,7 +150,7 @@ private fun FactSearch(
             )
     ) {
         Text(
-            text = "Search a fact",
+            text = stringResource(R.string.search_a_fact),
             style = MaterialTheme.typography.titleLarge
         )
         Text(
@@ -269,7 +268,7 @@ private fun SearchItem(
 
             if (!item.found) {
                 Text(
-                    text = "Not found",
+                    text = stringResource(R.string.not_found),
                     style = MaterialTheme.typography.labelLarge,
                     color = MaterialTheme.colorScheme.outline,
                     maxLines = 1,

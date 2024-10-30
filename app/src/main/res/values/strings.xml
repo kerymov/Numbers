@@ -8,4 +8,9 @@
     <string name="get_fact_about_random_number">Get fact about random number</string>
     <string name="search_history">Search history</string>
     <string name="here_you_will_see_the_history_of_your_searches">Here you will see the history of your searches</string>
+    <string name="not_found">Not found</string>
+    <string name="entered_value_is_out_of_bounds">Entered value is out of bounds</string>
+    <string name="navigation">Navigation</string>
+    <string name="close">Close</string>
+    <string name="error">Error</string>
 </resources>
