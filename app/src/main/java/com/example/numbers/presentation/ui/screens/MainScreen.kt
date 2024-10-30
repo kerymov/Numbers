@@ -53,6 +53,7 @@ import com.example.numbers.presentation.viewModels.MainViewModel
 @Composable
 fun MainScreen(
     viewModel: MainViewModel,
+    navigateToDetails: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val uiState = viewModel.uiState.collectAsState()
@@ -100,7 +101,10 @@ fun MainScreen(
             } else {
                 SearchHistory(
                     items = uiState.searchHistory.reversed(),
-                    onItemClick = { id -> viewModel.setCurrentFactById(id) },
+                    onItemClick = { id ->
+                        viewModel.setCurrentFactById(id)
+                        navigateToDetails()
+                    },
                     modifier = Modifier.fillMaxWidth()
                 )
             }
