@@ -13,7 +13,4 @@ interface FactDao {
 
     @Query("SELECT * FROM search_history")
     fun getAllFacts(): Flow<List<FactEntity>>
-
-    @Query("SELECT * FROM search_history WHERE id = :id")
-    fun getFactById(id: Long): Flow<FactEntity>
 }

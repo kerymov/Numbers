@@ -1,5 +1,6 @@
 package com.example.numbers.presentation.ui.screens
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -35,6 +36,7 @@ fun FactDetailsScreen(
         modifier = modifier.fillMaxSize()
     ) { innerPadding ->
         FactDescriptionCard(
+            found = uiState.value.currentFact?.found == true,
             text = uiState.value.currentFact?.text.toString(),
             modifier = Modifier
                 .fillMaxWidth()
@@ -46,6 +48,7 @@ fun FactDetailsScreen(
 
 @Composable
 private fun FactDescriptionCard(
+    found: Boolean,
     text: String,
     modifier: Modifier = Modifier
 ) {
@@ -56,10 +59,25 @@ private fun FactDescriptionCard(
         ),
         modifier = modifier
     ) {
-        Text(
-            text = text,
-            style = MaterialTheme.typography.titleMedium,
+        Column(
             modifier = Modifier.padding(vertical = 12.dp, horizontal = 16.dp)
-        )
+        ) {
+            if (!found) {
+                Text(
+                    text = "Not found",
+                    style = MaterialTheme.typography.labelLarge,
+                    color = MaterialTheme.colorScheme.outline,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 8.dp)
+                )
+            }
+
+            Text(
+                text = text,
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
     }
 }

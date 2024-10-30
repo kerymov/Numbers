@@ -9,5 +9,6 @@ data class FactEntity(
     val id: Long = 0,
 
     val number: Int,
-    val fact: String
+    val text: String,
+    val found: Boolean
 )

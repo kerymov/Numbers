@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.numbers.data.dataSource.RetrofitDataSource
 import com.example.numbers.data.dataSource.RoomDataSource
 import com.example.numbers.data.database.FactEntity
+import com.example.numbers.data.mappers.mapToEntity
 import com.example.numbers.data.mappers.mapToFact
 import com.example.numbers.data.models.Fact
 import com.example.numbers.data.network.NetworkResult
@@ -37,12 +38,7 @@ class FactsRepository(
         when (result) {
             is NetworkResult.Success -> {
                 val factResponse = result.data
-                saveFact(
-                    fact = FactEntity(
-                        number = factResponse.number,
-                        fact = factResponse.text
-                    )
-                )
+                saveFact(fact = factResponse.mapToEntity())
             }
             is NetworkResult.Error -> {
                 Log.e("Network", "Network exception: ${result.e.message}")
