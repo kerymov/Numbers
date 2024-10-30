@@ -24,6 +24,7 @@ import kotlin.collections.map
 data class MainUiState(
     val isLoading: Boolean = true,
     val errorMessage: String? = null,
+    val currentFact: FactUi? = null,
     val searchHistory: List<FactUi> = listOf()
 )
 
@@ -76,6 +77,15 @@ class MainViewModel(
             _uiState.update { it.copy(isLoading = true, errorMessage = null) }
             repository.getFactAboutRandomNumber()
         }
+    }
+
+    fun setCurrentFactById(id: Long) {
+        val currentFact = _uiState.value.searchHistory.find { it.id == id }
+        _uiState.update { it.copy(currentFact = currentFact) }
+    }
+
+    fun clearCurrentFact() {
+        _uiState.update { it.copy(currentFact = null) }
     }
 
     fun clearErrorMessage() {

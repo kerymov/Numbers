@@ -29,7 +29,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -101,7 +100,7 @@ fun MainScreen(
             } else {
                 SearchHistory(
                     items = uiState.searchHistory.reversed(),
-                    onItemClick = { },
+                    onItemClick = { id -> viewModel.setCurrentFactById(id) },
                     modifier = Modifier.fillMaxWidth()
                 )
             }
@@ -253,7 +252,7 @@ private fun SearchItem(
         )
 
         Text(
-            text = item.fact,
+            text = item.text,
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.secondary,
             maxLines = 1,

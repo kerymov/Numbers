@@ -7,6 +7,6 @@ fun Fact.mapToFactUi(): FactUi {
     return FactUi(
         id = this.id,
         number = this.number,
-        fact = this.text
+        text = this.text
     )
 }
