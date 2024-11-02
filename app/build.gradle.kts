@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.ksp)
 }
 
@@ -61,6 +62,9 @@ dependencies {
     implementation(libs.squareup.retrofit2.converter.gson)
     implementation(libs.squareup.okhttp3.okhttp)
     implementation(libs.squareup.okhttp3.logging.interceptor)
+
+    implementation(libs.dagger.hilt)
+    ksp(libs.dagger.hilt.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
